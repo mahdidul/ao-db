@@ -35,10 +35,8 @@
         function listNpcs(x){
             let list = document.getElementById('npcs');
             console.log(list);
-            let root = x.getElementByTagName('root');
-            console.log(root);
-            let npcs = root.getElementsByTagName('npc');
-            console.log(houses);
+            let npcs = x.getElementsByTagName('npc');
+            console.log(npcs);
             for(let i = 0; i < npcs.length; i++){
                 let li = document.createElement('li');
                 let npc = npcs[i].firstChild.nodeValue;
