@@ -11,48 +11,36 @@
         <h1>Reading Data from XML Files</h1>
     </header>
     <main>
-        <ul id="swords"></ul>
-        <ul id="houses"></ul>
+        <ul id="npcs"></ul>
         <pre id="output"></pre>
     </main>   
     <script>
         //XMLHttpRequest() - has responseXML property in the response
         
-        document.addEventListener('DOMContentLoaded', ()=>{
+        document.addEventListener('DOMContentLoaded', () => {
             //fetch the data as soon as the page has loaded
             let url = "https://mahdidul.github.io/ao-db/MONSTER.XML";
             fetch(url)
             .then(response=>response.text())
-            .then(data=>{
+            .then(data => {
                 //console.log(data);  //string
                 let parser = new DOMParser();
                 let xml = parser.parseFromString(data, "application/xml");
-                document.getElementById('output').textContent = data;
-                console.log(xml);
-                buildHouseList(xml);
-                buildSwordList(xml);
+                document.getElementById('root').textContent = data;
+                //console.log(xml);
+                listNpcs(xml);
             });
         })
         
-        function buildHouseList(x){
-            let list = document.getElementById('root');
-            let houses = x.getElementsByTagName('npc');
-            for(let i=0; i<houses.length; i++){
+        function listNpcs(x){
+            let list = document.getElementById('npcs');
+            console.log(list);
+            let npcs = x.getElementsByTagName('npc');
+            console.log(houses);
+            for(let i = 0; i < npcs.length; i++){
                 let li = document.createElement('li');
-                let house = houses[i].firstChild.nodeValue;
+                let npc = npcs[i].firstChild.nodeValue;
                 li.textContent = house;
-                list.appendChild(li);
-            }
-        }
-        
-        function buildSwordList(x){
-            let list = document.getElementById('swords');
-            let swords = x.getElementsByTagName('sword');
-            for(let i=0; i<swords.length; i++){
-                let li = document.createElement('li');
-                let swordName = swords[i].firstChild.nodeValue;
-                let person = swords[i].getAttribute('owner');
-                li.textContent = `${swordName} - ${person}`;
                 list.appendChild(li);
             }
         }
