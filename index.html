@@ -43,8 +43,14 @@
             for(let i = 0; i < npcs.length; i++){
                 let li = document.createElement('li');
                 let npc = npcs[i].getAttribute('名稱');
-                li.textContent = npc;
-                list.appendChild(li);
+                let hp = npcs[i].getAttribute('HP');
+                let def = npcs[i].getAttribute('防禦');
+                let mdef = npcs[i].getAttribute('魔防');
+                let exp = npcs[i].getAttribute('經驗價值');
+                if (exp > 0 || exp != null) {
+                    li.textContent = `Name = ${npc}, HP = ${hp}, Def = ${def}, M.Def = ${mdef}, Exp = ${exp.toLocaleString('en-US')}`;
+                    list.appendChild(li);
+                }
             }
         }
     </script>
