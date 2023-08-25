@@ -13,9 +13,6 @@
     <main>
         <h2>Parsed NPCs</h2>
         <ul id="npcs"></ul>
-        
-        <h2>XML Output</h2>
-        <pre id="output"></pre>
     </main>   
     <script>
         //XMLHttpRequest() - has responseXML property in the response
@@ -48,7 +45,7 @@
                 let mdef = npcs[i].getAttribute('魔防').replace(/(.)(?=(\d{3})+$)/g,'$1,');
                 let exp = npcs[i].getAttribute('經驗價值').replace(/(.)(?=(\d{3})+$)/g,'$1,');
                 if (exp > 0 && exp != null) {
-                    li.textContent = `Name = ${npc}, HP = ${hp}, Def = ${def}, M.Def = ${mdef}, Exp = ${exp}`;
+                    li.textContent = `${npc}, HP = ${hp}, Def = ${def}, M.Def = ${mdef}, Exp = ${exp}`;
                     list.appendChild(li);
                 }
             }
