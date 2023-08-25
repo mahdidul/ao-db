@@ -1,23 +1,61 @@
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.1.2/papaparse.js"></script>
-<script>
-    function arrayToTable(tableData) {
-        var table = $('<table></table>');
-        $(tableData).each(function (i, rowData) {
-            var row = $('<tr></tr>');
-            $(rowData).each(function (j, cellData) {
-                row.append($('<td>'+cellData+'</td>'));
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reading Data from XML Files</title>
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="main.css" />
+</head>
+<body>
+    <header>
+        <h1>Reading Data from XML Files</h1>
+    </header>
+    <main>
+        <ul id="swords"></ul>
+        <ul id="houses"></ul>
+        <pre id="output"></pre>
+    </main>   
+    <script>
+        //XMLHttpRequest() - has responseXML property in the response
+        
+        document.addEventListener('DOMContentLoaded', ()=>{
+            //fetch the data as soon as the page has loaded
+            let url = "https://github.com/mahdidul/ao-db/raw/main/MONSTER.XML";
+            fetch(url)
+            .then(response=>response.text())
+            .then(data=>{
+                //console.log(data);  //string
+                let parser = new DOMParser();
+                let xml = parser.parseFromString(data, "application/xml");
+                document.getElementById('output').textContent = data;
+                console.log(xml);
+                buildHouseList(xml);
+                buildSwordList(xml);
             });
-            table.append(row);
-        });
-        return table;
-    }
-
-    $.ajax({
-        type: "GET",
-        url: "http://localhost/MONSTER.XML",
-        success: function (data) {
-            $('body').append(arrayToTable(Papa.parse(data).data));
+        })
+        
+        function buildHouseList(x){
+            let list = document.getElementById('root');
+            let houses = x.getElementsByTagName('npc');
+            for(let i=0; i<houses.length; i++){
+                let li = document.createElement('li');
+                let house = houses[i].firstChild.nodeValue;
+                li.textContent = house;
+                list.appendChild(li);
+            }
         }
-    });
-</script>
+        
+        function buildSwordList(x){
+            let list = document.getElementById('swords');
+            let swords = x.getElementsByTagName('sword');
+            for(let i=0; i<swords.length; i++){
+                let li = document.createElement('li');
+                let swordName = swords[i].firstChild.nodeValue;
+                let person = swords[i].getAttribute('owner');
+                li.textContent = `${swordName} - ${person}`;
+                list.appendChild(li);
+            }
+        }
+    </script>
+</body>
+</html>
