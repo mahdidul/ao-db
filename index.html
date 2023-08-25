@@ -42,7 +42,7 @@
             console.log(npcs);
             for(let i = 0; i < npcs.length; i++){
                 let li = document.createElement('li');
-                let npc = npcs[i].attr('名稱');
+                let npc = npcs[i].getAttribute('名稱');
                 li.textContent = house;
                 list.appendChild(li);
             }
