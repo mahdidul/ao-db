@@ -22,6 +22,10 @@
                 //console.log(xml);
                 let arrray = listNpcs(xml);
                 var table = new Tabulator("#table-container", {
+                    pagination: "local",
+                    paginationSize: 10,
+                    paginationSizeSelector: [10, 20, 50, 100],
+                    paginationCounter: "rows",
                     data: arrray, //assign data to table
                     autoColumns: true, //create columns from data field names
                 });
