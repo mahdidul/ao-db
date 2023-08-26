@@ -20,8 +20,10 @@
                 let parser = new DOMParser();
                 let xml = parser.parseFromString(data, "application/xml");
                 //console.log(xml);
-                listNpcs(xml, dataArray);
-                createTableFromObjects(dataArray);
+                let arrray = listNpcs(xml, dataArray);
+                let table = createTableFromObjects(arrray);
+                const tableContainer = document.getElementById('table-container');
+                tableContainer.appendChild(table);
             });
         })
         
@@ -71,14 +73,14 @@
             for (const obj of data) {
                 const dataRow = document.createElement('tr');
                 for (const key of keys) {
-                const dataCell = document.createElement('td');
-                dataCell.textContent = obj[key];
-                dataRow.appendChild(dataCell);
+                    const dataCell = document.createElement('td');
+                    dataCell.textContent = obj[key];
+                    dataRow.appendChild(dataCell);
+                }
+                table.appendChild(dataRow);
             }
-            table.appendChild(dataRow);
-        }
         
-        return table;
+            return table;
         }
     </script>
 </body>
