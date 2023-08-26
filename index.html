@@ -27,9 +27,9 @@
         
         function listNpcs(x, dataArray){
             let list = document.getElementById('npcs');
-            console.log(list);
+            // console.log(list);
             let npcs = x.getElementsByTagName('npc');
-            console.log(npcs);
+            // console.log(npcs);
             for(let i = 0; i < npcs.length; i++){
                 try {
                     let li = document.createElement('li');
@@ -41,7 +41,7 @@
                         let def = npcs[i].getAttribute('防禦').replace(/(.)(?=(\d{3})+$)/g,'$1,');
                         let mdef = npcs[i].getAttribute('魔防').replace(/(.)(?=(\d{3})+$)/g,'$1,');
                         exp = exp.replace(/(.)(?=(\d{3})+$)/g,'$1,');
-                        dataArray.append({ level: level, name: npc, hp: hp, def: def, mdef: mdef, exp: exp });
+                        dataArray.push({ level: level, name: npc, hp: hp, def: def, mdef: mdef, exp: exp });
                     }
                 } catch (e) {
                     console.log(e);
