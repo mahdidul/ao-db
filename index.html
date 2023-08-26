@@ -5,6 +5,8 @@
     <title>Reading Data from XML Files</title>
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="main.css" />
+    <link href="https://unpkg.com/tabulator-tables/dist/css/tabulator.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://unpkg.com/tabulator-tables/dist/js/tabulator.min.js"></script>
 </head>
 <body>
     <div id="table-container"></div>
@@ -16,18 +18,19 @@
             fetch(url)
             .then(response=>response.text())
             .then(data => {
-                let dataArray = [];
                 let parser = new DOMParser();
                 let xml = parser.parseFromString(data, "application/xml");
                 //console.log(xml);
-                let arrray = listNpcs(xml, dataArray);
-                let table = createTableFromObjects(arrray);
-                const tableContainer = document.getElementById('table-container');
-                tableContainer.appendChild(table);
+                let arrray = listNpcs(xml);
+                var table = new Tabulator("#table-container", {
+                    data: arrray, //assign data to table
+                    autoColumns: true, //create columns from data field names
+                });
             });
         })
         
-        function listNpcs(x, dataArray){
+        function listNpcs(x) {
+            let dataArray = [];
             let list = document.getElementById('npcs');
             // console.log(list);
             let npcs = x.getElementsByTagName('npc');
@@ -51,36 +54,6 @@
             }
 
             return dataArray;
-        }
-
-        function createTableFromObjects(data) {
-            
-            console.log(data);
-            
-            const table = document.createElement('table');
-            const headerRow = document.createElement('tr');
-            
-            // Create table header row
-            const keys = Object.keys(data[0]);
-            for (const key of keys) {
-                const headerCell = document.createElement('th');
-                headerCell.textContent = key;
-                headerRow.appendChild(headerCell);
-            }
-            table.appendChild(headerRow);
-            
-            // Create table data rows
-            for (const obj of data) {
-                const dataRow = document.createElement('tr');
-                for (const key of keys) {
-                    const dataCell = document.createElement('td');
-                    dataCell.textContent = obj[key];
-                    dataRow.appendChild(dataCell);
-                }
-                table.appendChild(dataRow);
-            }
-        
-            return table;
         }
     </script>
 </body>
