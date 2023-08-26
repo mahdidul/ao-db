@@ -130,11 +130,11 @@
                     let npc = npcs[i].getAttribute('名稱');
                     let exp = npcs[i].getAttribute('經驗價值');
                     if (exp != null && exp > 0) {
-                        let level = npcs[i].getAttribute('等級').replace(/(.)(?=(\d{3})+$)/g,'$1,');
-                        let hp = npcs[i].getAttribute('HP').replace(/(.)(?=(\d{3})+$)/g,'$1,');
-                        let def = npcs[i].getAttribute('防禦').replace(/(.)(?=(\d{3})+$)/g,'$1,');
-                        let mdef = npcs[i].getAttribute('魔防').replace(/(.)(?=(\d{3})+$)/g,'$1,');
-                        exp = exp.replace(/(.)(?=(\d{3})+$)/g,'$1,');
+                        let level = npcs[i].getAttribute('等級');//.replace(/(.)(?=(\d{3})+$)/g,'$1,');
+                        let hp = npcs[i].getAttribute('HP');//.replace(/(.)(?=(\d{3})+$)/g,'$1,');
+                        let def = npcs[i].getAttribute('防禦');//.replace(/(.)(?=(\d{3})+$)/g,'$1,');
+                        let mdef = npcs[i].getAttribute('魔防');//.replace(/(.)(?=(\d{3})+$)/g,'$1,');
+                        exp = exp;//.replace(/(.)(?=(\d{3})+$)/g,'$1,');
                         dataArray.push({ level: level, name: npc, hp: hp, def: def, mdef: mdef, exp: exp });
                     }
                 } catch (e) {
