@@ -22,12 +22,19 @@
                 //console.log(xml);
                 let arrray = listNpcs(xml);
                 var table = new Tabulator("#table-container", {
+                    data: arrray,
+                    layout: "fitColumns",
                     pagination: "local",
                     paginationSize: 10,
                     paginationSizeSelector: [10, 20, 50, 100],
-                    paginationCounter: "rows",
-                    data: arrray, //assign data to table
-                    autoColumns: true, //create columns from data field names
+                    columns:[
+                        {title:"Level", field:"level"},
+                        {title:"Name", field:"npc"},
+                        {title:"HP", field:"hp"},
+                        {title:"Def", field:"def"},    
+                        {title:"M. Def", field:"mdef"},
+                        {title: "Exp", field: "exp"},
+                    ],
                 });
                 console.log(table);
             });
