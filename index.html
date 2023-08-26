@@ -12,7 +12,16 @@
     </header>
     <main>
         <h2>Parsed NPCs</h2>
-        <ul id="npcs"></ul>
+        <table>
+            <tr>
+                <th>Level</th>
+                <th>Name</th>
+                <th>HP</th>
+                <th>Def</th>
+                <th>M. Def</th>
+            </tr>
+            <tr id="npcs"></tr>
+        </table>
     </main>   
     <script>
         //XMLHttpRequest() - has responseXML property in the response
@@ -47,7 +56,7 @@
                         let def = npcs[i].getAttribute('防禦').replace(/(.)(?=(\d{3})+$)/g,'$1,');
                         let mdef = npcs[i].getAttribute('魔防').replace(/(.)(?=(\d{3})+$)/g,'$1,');
                         exp = exp.replace(/(.)(?=(\d{3})+$)/g,'$1,');
-                        li.textContent = `Lv. ${level} - ${npc}, HP = ${hp}, Def = ${def}, M.Def = ${mdef}, Exp = ${exp}`;
+                        li.textContent = `<td>${level}</td><td>${npc}</td><td>${hp}</td><td>${def}</td><td>${mdef}</td><td>${exp}</td>`;
                         list.appendChild(li);                        
                     }
                 } catch (e) {
